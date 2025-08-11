@@ -3,13 +3,22 @@ import styled from 'styled-components';
 import DownArrow from '@assets/icons/arrow_drop_down.svg';
 import UpArrow from '@assets/icons/arrow_drop_up.svg';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setUser } from '@/pages/App/store/appSlice';
 
 export default function Header() {
   const [showMenu, setShowMenu] = useState(false);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleShowMenu = () => {
     setShowMenu(!showMenu);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    dispatch(setUser({}));
+    navigate('/');
   };
 
   return (
@@ -38,7 +47,7 @@ export default function Header() {
               <li>Xem thông tin</li>
               <li>Đổi mật khẩu</li>
               <li>Đổi ảnh đại diện</li>
-              <li>Đăng xuất</li>
+              <li onClick={handleLogout}>Đăng xuất</li>
             </ul>
           )}
         </div>
@@ -55,7 +64,7 @@ const HeaderWrapper = styled.div`
   header {
     margin: 0 40px;
     display: flex;
-    padding: 10px 0;
+    // padding: 10px 0;
     align-items: center;
   }
 

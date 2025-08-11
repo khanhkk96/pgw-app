@@ -11,6 +11,10 @@ export default function Footer() {
 }
 
 const FooterWrapper = styled.div`
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+
   .footer {
     width: 100%;
     background-color: black;
